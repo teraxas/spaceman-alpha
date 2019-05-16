@@ -1,14 +1,15 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 import { Player, PlayerFull } from './model';
 import { spacemanApiUrl } from './tokens';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlayerService /*implements CanActivate*/ {
+export class PlayerService {
+  private _authToken: string;
 
   constructor(
     @Inject(spacemanApiUrl) private apiUrl: string,
@@ -16,12 +17,6 @@ export class PlayerService /*implements CanActivate*/ {
   ) {
     this.apiUrl = `${apiUrl}/Player`;
   }
-
-  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-  //   return this.get().pipe(
-  //     catch ()
-  //   );
-  // }
 
   get(): Observable<Player> {
     return this.http.get<Player>(this.apiUrl);
@@ -31,7 +26,20 @@ export class PlayerService /*implements CanActivate*/ {
     return this.http.post<Player>(this.apiUrl, player);
   }
 
-  authenticate(player: PlayerFull): Observable<{ player: Player, token: string }> {
-    return this.http.post<{ player: Player, token: string }>(`${this.apiUrl}/authenticate`, player);
+  authenticate(player: PlayerFull): Observable<Player> {
+    return this.http.post<{ player: Player, token: string }>(`${this.apiUrl}/authenticate`, player)
+      .pipe(
+        tap((v) => this.setAuthToken(v.token)),
+        map(v => v.player)
+      );
   }
+
+  get authToken(): string {
+    return this._authToken;
+  }
+
+  private setAuthToken(token: string) {
+    this._authToken = token;
+  }
+
 }

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { SpacemanApiModule } from '../spaceman-api';
 import { RouterModule, Routes } from '@angular/router';
+import { SpacemanApiModule } from '../spaceman-api';
+import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent }
+  { path: '', redirectTo: 'main' },
+  { path: 'main', component: MainComponent },
 ];
 
 @NgModule({
   declarations: [
-    LoginComponent
+    MainComponent,
   ],
   imports: [
     CommonModule,
@@ -19,4 +19,4 @@ const routes: Routes = [
     SpacemanApiModule,
   ]
 })
-export class PlayerModule { }
+export class GameModule { }
