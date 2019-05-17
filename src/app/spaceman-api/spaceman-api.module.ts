@@ -8,6 +8,14 @@ import { loginUrl, spacemanApiUrl } from './tokens';
 import { AuthGuard } from './auth.guard';
 import { environment } from 'src/environments/environment';
 
+const authInterceptorFactory = function (
+  playerService: PlayerService,
+  router: Router,
+  loginUrlString: string,
+) {
+  return new AuthInterceptor(playerService, router, loginUrlString);
+}
+
 @NgModule({
   declarations: [],
   imports: [
@@ -24,13 +32,7 @@ export class SpacemanApiModule {
         PlayerService,
         {
           provide: HTTP_INTERCEPTORS,
-          useFactory: function (
-            playerService: PlayerService,
-            router: Router,
-            loginUrlString: string,
-          ) {
-            return new AuthInterceptor(playerService, router, loginUrlString);
-          },
+          useFactory: authInterceptorFactory,
           multi: true,
           deps: [Router, PlayerService, loginUrl]
         },
