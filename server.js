@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist/SpacemanApp'));
 
 const forceSSL = function () {
     return function (req, res, next) {
