@@ -15,7 +15,9 @@ export class AuthInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authReq = req.clone({ headers: req.headers.set(headerName, this.playerService.authToken) });
+    const authReq = this.playerService.authToken
+      ? req.clone({ headers: req.headers.set(headerName, this.playerService.authToken) })
+      : req;
     return next.handle(authReq)
       .pipe(
         catchError(x => this.handleAuthError(x))

@@ -1,8 +1,11 @@
-<label>
-  <span>Username</span>
-  <input type="text">
-</label>
-<label>
-  <span>Password</span>
-  <input type="password">
-</label>
+<form [formGroup]="form" (submit)="submit()">
+  <label>
+    <span>Username</span>
+    <input type="text" formControlName="username">
+  </label>
+  <label>
+    <span>Password</span>
+    <input type="password" formControlName="password">
+  </label>
+  <button type="submit" [disabled]="!form.valid">Login</button>
+</form>

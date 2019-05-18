@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap, map } from 'rxjs/operators';
-import { Player, PlayerFull } from './model';
+import { Observable, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators';
+import { Player, PlayerFull, PlayerLoginInfo } from './model';
 import { spacemanApiUrl } from './tokens';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class PlayerService {
     @Inject(spacemanApiUrl) private apiUrl: string,
     private http: HttpClient,
   ) {
-    this.apiUrl = `${apiUrl}/Player`;
+    this.apiUrl = `${apiUrl}/api/Player`;
   }
 
   get(): Observable<Player> {
@@ -26,11 +26,12 @@ export class PlayerService {
     return this.http.post<Player>(this.apiUrl, player);
   }
 
-  authenticate(player: PlayerFull): Observable<Player> {
+  authenticate(player: PlayerLoginInfo): Observable<Player> {
     return this.http.post<{ player: Player, token: string }>(`${this.apiUrl}/authenticate`, player)
       .pipe(
         tap((v) => this.setAuthToken(v.token)),
-        map(v => v.player)
+        map(v => v.player),
+        // catchError(e => of(undefined)),
       );
   }
 
