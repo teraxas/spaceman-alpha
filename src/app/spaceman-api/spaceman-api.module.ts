@@ -4,9 +4,9 @@ import { PlayerService } from './player.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthInterceptor } from './auth.interceptor';
-import { loginUrl, spacemanApiUrl } from './tokens';
+import { loginUrl } from './tokens';
 import { AuthGuard } from './auth.guard';
-import { environment } from 'src/environments/environment';
+import { LoggedInGuard } from './logged-in.guard';
 
 const authInterceptorFactory = function (
   playerService: PlayerService,
@@ -29,6 +29,7 @@ export class SpacemanApiModule {
       ngModule: SpacemanApiModule,
       providers: [
         AuthGuard,
+        LoggedInGuard,
         PlayerService,
         {
           provide: HTTP_INTERCEPTORS,
@@ -36,8 +37,6 @@ export class SpacemanApiModule {
           multi: true,
           deps: [Router, PlayerService, loginUrl]
         },
-        { provide: spacemanApiUrl, useValue: environment.apiUrl },
-        { provide: loginUrl, useValue: '/player/login' },
       ]
     };
   }

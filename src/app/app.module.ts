@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SpacemanApiModule } from './spaceman-api';
+import { SpacemanApiModule, PlayerService } from './spaceman-api';
 
 @NgModule({
   declarations: [
@@ -17,4 +17,8 @@ import { SpacemanApiModule } from './spaceman-api';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private playerService: PlayerService,
+  ) { }
+}

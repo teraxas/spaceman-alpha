@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PlayerLoginInfo, Player } from '../../spaceman-api/model';
 import { PlayerService } from '../../spaceman-api';
+import { Router } from '@angular/router';
 
 const loginValidator = () => [Validators.required]; // , Validators.minLength(5), Validators.maxLength(100)];
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private playerService: PlayerService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -29,11 +32,11 @@ export class LoginComponent implements OnInit {
 
     const value = <PlayerLoginInfo>this.form.value;
     const player = await this.playerService.authenticate(value).toPromise();
-    // .then(this.onLogin.bind(this));
     this.onLogin(player);
   }
 
   private onLogin(player: Player) {
+    this.router.navigateByUrl('/game');
     console.log(`Logged in as ${player.username}`);
   }
 

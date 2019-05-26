@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 import { Player, PlayerFull, PlayerLoginInfo } from './model';
-import { spacemanApiUrl } from './tokens';
+import { spacemanApiUrl, windowToken, storageToken } from './tokens';
+
+const authTokenKey = 'auth_token';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +14,14 @@ export class PlayerService {
   private _authToken: string;
 
   constructor(
-    @Inject(spacemanApiUrl) private apiUrl: string,
     private http: HttpClient,
+    @Inject(spacemanApiUrl) private apiUrl: string,
+    @Inject(windowToken) private windowRef: Window,
+    @Inject(storageToken) private storage: Storage,
   ) {
     this.apiUrl = `${apiUrl}/api/Player`;
+    this.popToken();
+    this.windowRef.addEventListener('unload', this.saveAuthToken.bind(this));
   }
 
   get(): Observable<Player> {
@@ -41,6 +47,18 @@ export class PlayerService {
 
   private setAuthToken(token: string) {
     this._authToken = token;
+  }
+
+  private saveAuthToken() {
+    if (this._authToken) {
+      this.storage.setItem(authTokenKey, this._authToken);
+    }
+  }
+
+  private popToken() {
+    const token = this.storage.getItem(authTokenKey);
+    this.storage.removeItem(authTokenKey);
+    this.setAuthToken(token);
   }
 
 }

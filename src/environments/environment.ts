@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://spaceman-api.herokuapp.com',
+  // apiUrl: 'http://localhost:9430',
 };
 
 /*
