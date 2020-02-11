@@ -20,6 +20,7 @@ export interface OrbitBody {
   appearance: {
     color: string;
   };
+  orbiters?: OrbitBody[];
 }
 
 @Component({
@@ -76,7 +77,15 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
 
     const now = Date.now();
     const dts = (now - this.lastFrameTime) / 1000;
-    this.planets.forEach((planet, idx) => {
+    const planets = this.planets;
+    this.drawBodies(planets, dts);
+    this.lastFrameTime = now;
+    requestAnimationFrame(() => this.draw());
+  }
+
+  private drawBodies(planets: OrbitBody[], dts: number, baseX = 0, baseY = 0) {
+    this.ctx2d.translate(baseX, baseY);
+    planets.forEach((planet, idx) => {
       let theta = 0;
       this.planetsAngle[idx] += planet.rv / Math.PI * dts;
       theta = this.planetsAngle[idx];
@@ -85,10 +94,12 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
       if (planet.distance) {
         this.drawOrbit(this.ctx2d, planet);
       }
+      if (planet.orbiters && planet.orbiters.length) {
+        this.drawBodies(planet.orbiters, dts, x, y);
+      }
       this.drawPlanet(this.ctx2d, x, y, planet);
     });
-    this.lastFrameTime = now;
-    requestAnimationFrame(() => this.draw());
+    this.ctx2d.translate(-baseX, -baseY);
   }
 
   private drawPlanet(ctx2d: CanvasRenderingContext2D, x: number, y: number, planet: OrbitBody) {

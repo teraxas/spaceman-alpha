@@ -45,6 +45,26 @@ export class MainComponent implements OnInit {
       appearance: {
         color: 'orange',
       },
+      orbiters: [
+        {
+          name: 'mun',
+          rad: 3,
+          distance: 10,
+          rv: 4,
+          appearance: {
+            color: 'green',
+          },
+        },
+        {
+          name: 'mun',
+          rad: 4,
+          distance: 20,
+          rv: 2,
+          appearance: {
+            color: 'lime',
+          },
+        },
+      ]
     },
     {
       name: 'gray',
