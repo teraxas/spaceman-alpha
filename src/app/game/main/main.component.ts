@@ -31,11 +31,22 @@ export class MainComponent implements OnInit {
         {
           name: 'pinko',
           rad: 3,
-          distance: 20,
+          distance: 23,
           rv: 1,
           appearance: {
             color: 'pink',
           },
+          orbiters: [
+            {
+              name: 'yellow',
+              rad: 2,
+              distance: 6,
+              rv: 1,
+              appearance: {
+                color: 'yellow',
+              },
+            }
+          ]
         },
       ]
     },
