@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 html {
-    height: 100%;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    // body {
-    //     background-image: linear-gradient(to bottom, #850404, #860023, #7e003c, #6c0053, #501464, #44165c, #381754, #2e174b, #2e0f33, #260c20, #1a0611, #000000);
-    // }
+  body {
+    background-color: black;
+    color: lightgrey;
+  }
 }
