@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
       name: 'bar',
       rad: 15,
       distance: 100,
-      rv: 2,
+      rv: 1,
       appearance: {
         color: 'red',
       },
@@ -32,9 +32,27 @@ export class MainComponent implements OnInit {
       name: 'foo',
       rad: 10,
       distance: 70,
-      rv: 1,
+      rv: 2,
       appearance: {
         color: 'blue',
+      },
+    },
+    {
+      name: 'oran',
+      rad: 7,
+      distance: 130,
+      rv: 0.5,
+      appearance: {
+        color: 'orange',
+      },
+    },
+    {
+      name: 'gray',
+      rad: 7,
+      distance: 170,
+      rv: 3,
+      appearance: {
+        color: 'gray',
       },
     },
   ];

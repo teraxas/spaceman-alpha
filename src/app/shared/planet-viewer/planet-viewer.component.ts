@@ -82,6 +82,9 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
       theta = this.planetsAngle[idx];
       const x = planet.distance * Math.cos(theta);
       const y = planet.distance * Math.sin(theta);
+      if (planet.distance) {
+        this.drawOrbit(this.ctx2d, planet);
+      }
       this.drawPlanet(this.ctx2d, x, y, planet);
     });
     this.lastFrameTime = now;
@@ -95,6 +98,16 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
     ctx2d.beginPath();
     ctx2d.arc(0, 0, planet.rad, 0, 2 * Math.PI, false);
     ctx2d.fill();
+    ctx2d.restore();
+  }
+
+  private drawOrbit(ctx2d: CanvasRenderingContext2D, planet: OrbitBody) {
+    ctx2d.save();
+    ctx2d.strokeStyle = planet.appearance.color;
+    ctx2d.translate(0, 0);
+    ctx2d.beginPath();
+    ctx2d.arc(0, 0, planet.distance, 0, 2 * Math.PI, false);
+    ctx2d.stroke();
     ctx2d.restore();
   }
 }
