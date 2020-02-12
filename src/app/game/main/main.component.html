@@ -1,5 +1,13 @@
 <p>
   main works!
 </p>
-
-<app-planet-viewer [planets]="planets"></app-planet-viewer>
+<div>
+  <input #orbits type="checkbox" />
+  <span>Orbits</span>
+</div>
+<div>
+  <input #shaders type="checkbox" />
+  <span>Shaders</span>
+</div>
+<app-planet-viewer [planets]="planets" [orbitsEnabled]="orbits.checked" [shadersEnabled]="shaders.checked">
+</app-planet-viewer>

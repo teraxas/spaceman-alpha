@@ -6,7 +6,7 @@
     "start": "node server.js",
     "build": "ng build --prod",
     "build:gh": "ng build --prod --base-href https://teraxas.github.io/spaceman-alpha/",
-    "github": "npm run build:gh && ngh",
+    "github": "npm run build:gh && ngh -d dist/SpacemanApp",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -17,6 +17,8 @@ export class MainComponent implements OnInit {
       rv: 0,
       appearance: {
         color: 'yellow',
+        shaderStyle: 'rgba(241, 196, 18, 0.67)',
+        shaderOffset: 3,
       },
     },
     {
@@ -26,6 +28,8 @@ export class MainComponent implements OnInit {
       rv: 1,
       appearance: {
         color: 'red',
+        shaderStyle: 'rgba(241, 18, 18, 0.59)',
+        shaderOffset: 4,
       },
       orbiters: [
         {
@@ -57,6 +61,8 @@ export class MainComponent implements OnInit {
       rv: 2,
       appearance: {
         color: 'blue',
+        shaderStyle: 'rgba(50, 205, 229, 0.71)',
+        shaderOffset: 2,
       },
     },
     {
@@ -66,6 +72,8 @@ export class MainComponent implements OnInit {
       rv: 0.5,
       appearance: {
         color: 'orange',
+        shaderStyle: 'rgba(241, 18, 18, 0.59)',
+        shaderOffset: 2,
       },
       orbiters: [
         {
@@ -92,7 +100,7 @@ export class MainComponent implements OnInit {
       name: 'gray',
       rad: 7,
       distance: 170,
-      rv: 3,
+      rv: 0.3,
       appearance: {
         color: 'gray',
       },

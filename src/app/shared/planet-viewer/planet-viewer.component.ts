@@ -19,6 +19,8 @@ export interface OrbitBody {
   rv: number;
   appearance: {
     color: string;
+    shaderStyle?: string;
+    shaderOffset?: number;
   };
   orbiters?: OrbitBody[];
 }
@@ -33,6 +35,8 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() height = 400;
   @Input() width = 400;
+  @Input() shadersEnabled = true;
+  @Input() orbitsEnabled = true;
   @Input() planets: OrbitBody[];
 
   @ViewChild('container') private container: ElementRef;
@@ -91,13 +95,16 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
       theta = this.planetsAngle[idx];
       const x = planet.distance * Math.cos(theta);
       const y = planet.distance * Math.sin(theta);
-      if (planet.distance) {
+      if (this.orbitsEnabled && planet.distance) {
         this.drawOrbit(this.ctx2d, planet);
       }
       if (planet.orbiters && planet.orbiters.length) {
         this.drawBodies(planet.orbiters, dts, x, y);
       }
       this.drawPlanet(this.ctx2d, x, y, planet);
+      if (this.shadersEnabled && planet.appearance.shaderStyle) {
+        this.drawShader(this.ctx2d, x, y, planet);
+      }
     });
     this.ctx2d.translate(-baseX, -baseY);
   }
@@ -108,6 +115,16 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
     ctx2d.translate(x, y);
     ctx2d.beginPath();
     ctx2d.arc(0, 0, planet.rad, 0, 2 * Math.PI, false);
+    ctx2d.fill();
+    ctx2d.restore();
+  }
+
+  private drawShader(ctx2d: CanvasRenderingContext2D, x: number, y: number, planet: OrbitBody) {
+    ctx2d.save();
+    ctx2d.fillStyle = planet.appearance.shaderStyle;
+    ctx2d.translate(x, y);
+    ctx2d.beginPath();
+    ctx2d.arc(0, 0, planet.rad + planet.appearance.shaderOffset, 0, 2 * Math.PI, false);
     ctx2d.fill();
     ctx2d.restore();
   }
