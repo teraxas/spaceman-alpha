@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
       name: 'bar',
       rad: 15,
       distance: 100,
-      rv: 1,
+      rv: 0.3,
       appearance: {
         color: 'red',
         shaderStyle: 'rgba(241, 18, 18, 0.59)',
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit {
           name: 'pinko',
           rad: 3,
           distance: 23,
-          rv: 1,
+          rv: 0.5,
           appearance: {
             color: 'pink',
           },
@@ -45,7 +45,7 @@ export class MainComponent implements OnInit {
               name: 'yellow',
               rad: 2,
               distance: 6,
-              rv: 1,
+              rv: 0.5,
               appearance: {
                 color: 'yellow',
               },
@@ -58,18 +58,18 @@ export class MainComponent implements OnInit {
       name: 'foo',
       rad: 10,
       distance: 70,
-      rv: 2,
+      rv: 0.4,
       appearance: {
         color: 'blue',
-        shaderStyle: 'rgba(50, 205, 229, 0.71)',
-        shaderOffset: 2,
+        shaderStyle: 'rgba(50, 205, 229, 0.41)',
+        shaderOffset: 1,
       },
     },
     {
       name: 'oran',
       rad: 7,
       distance: 130,
-      rv: 0.5,
+      rv: 0.2,
       appearance: {
         color: 'orange',
         shaderStyle: 'rgba(241, 18, 18, 0.59)',
@@ -80,16 +80,16 @@ export class MainComponent implements OnInit {
           name: 'mun',
           rad: 3,
           distance: 10,
-          rv: 4,
+          rv: 1,
           appearance: {
             color: 'cyan',
           },
         },
         {
           name: 'mun2',
-          rad: 4,
+          rad: 2,
           distance: 20,
-          rv: 2,
+          rv: 0.2,
           appearance: {
             color: 'lime',
           },
@@ -100,9 +100,11 @@ export class MainComponent implements OnInit {
       name: 'gray',
       rad: 7,
       distance: 170,
-      rv: 0.3,
+      rv: 0.1,
       appearance: {
         color: 'gray',
+        shaderStyle: 'rgba(142, 142, 142, 0.36)',
+        shaderOffset: 1,
       },
     },
   ];

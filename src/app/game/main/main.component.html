@@ -2,11 +2,11 @@
   main works!
 </p>
 <div>
-  <input #orbits type="checkbox" />
+  <input #orbits type="checkbox" [checked]="true" />
   <span>Orbits</span>
 </div>
 <div>
-  <input #shaders type="checkbox" />
+  <input #shaders type="checkbox" [checked]="true" />
   <span>Shaders</span>
 </div>
 <app-planet-viewer [planets]="planets" [orbitsEnabled]="orbits.checked" [shadersEnabled]="shaders.checked">
