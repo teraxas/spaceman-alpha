@@ -24,7 +24,7 @@ const authInterceptorFactory = function (
   ]
 })
 export class SpacemanApiModule {
-  public static forRoot(): ModuleWithProviders {
+  public static forRoot(): ModuleWithProviders<SpacemanApiModule> {
     return {
       ngModule: SpacemanApiModule,
       providers: [
