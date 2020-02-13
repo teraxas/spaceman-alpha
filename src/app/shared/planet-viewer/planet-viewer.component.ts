@@ -39,7 +39,7 @@ export class PlanetViewerComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() orbitsEnabled = true;
   @Input() planets: OrbitBody[];
 
-  @ViewChild('container') private container: ElementRef;
+  @ViewChild('container', { static: true }) private container: ElementRef;
   private canvas: HTMLCanvasElement;
   private ctx2d: CanvasRenderingContext2D;
   private lastFrameTime: number;
